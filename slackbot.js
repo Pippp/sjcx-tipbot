@@ -9,9 +9,10 @@ var monk = require('monk');
 var db = monk('localhost:27017/countertipper');
 
 // Delete this before push
-var secret_token = "";
 
-var slackbot = function(bs) {
+
+var slackbot = function(bs,settings) {
+    var secret_token = settings.Slackbot.secret_token;
     var app = express();
 
     app.set('port', process.env.PORT || 3000);

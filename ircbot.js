@@ -7,18 +7,12 @@ var bcrypt = require('bcrypt');
 
 var irc = require("irc");
 
-var config = {
-	channels: ["#storj"],
-	server: "irc.freenode.net",
-	botName: "tipsjcx"
-};
-
 var accounts = []; // list of everyone who has logged in
 
-var bot = new irc.Client(config.server, config.botName, {channels: config.channels}); // Connect to server and setup the irc object
 
 // Constructor
-function ircbot(bs) {
+function ircbot(bs,settings) {
+  var bot = new irc.Client(settings.IRC.server, settings.IRC.botName, {channels: settings.IRC.channels}); // Connect to server and setup the irc object
   bot.addListener('error', function(message) {
     console.log('error: ', message);
   });
