@@ -6,12 +6,12 @@ var monk = require('monk');
 var db = monk('localhost:27017/countertipper');
 
 // Constructor
-function twitterbot(bs) {
+function twitterbot(bs,settings) {
    var T = new Twit({
-    consumer_key:         '',
-    consumer_secret:      '',
-    access_token:         '',
-    access_token_secret:  ''
+    consumer_key:         settings.Twitter.consumer_key,
+    consumer_secret:      settings.Twitter.consumer_secret,
+    access_token:         settings.Twitter.access_token,
+    access_token_secret:  settings.Twitter.access_token_secret
   });
 
    var config = {nick: "tipsjcx"};

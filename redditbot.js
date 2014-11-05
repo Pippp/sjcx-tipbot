@@ -8,21 +8,20 @@ var monk = require('monk');
 var db = monk('localhost:27017/countertipper');
 
 //constructor
-function redditbot(bs){
+function redditbot(bs,settings){
     // with the bot account create a reddit script 'app' and use the appId and secret
-    reddit.setupOAuth2("app-id", "app-secret");
+    reddit.setupOAuth2(settings.Reddit.appId, settings.Reddit.appSecret);
     // authenticate with the bots username and password
-    reddit.auth({"username": "tipBotUserName", "password": "password"}, function(err, response) {
+    reddit.auth({"username": settings.Reddit.username, "password": settings.Reddit.password}, function(err, response) {
         if(err) {
             console.log("Unable to authenticate user: " + err);
         }
     });
-    var config = {nick:"tipBotUserName"};
     var CommentStream = rawjs.CommentStream;
     var stream = new CommentStream();
     stream.on('comment', function(comment) {
         var isCommentForMe = comment.body.split(" ");
-        if (isCommentForMe[0] != "+/u/"+config.nick) return;
+        if (isCommentForMe[0] != "+/u/"+settings.Reddit.username) return;
         if (isCommentForMe[1] == undefined) return;
         var command = isCommentForMe[1].replace(/(\r\n|\n|\r)/gm,"");
         if (command == "register") handleRegister(comment.author,comment.name,reddit,bs);

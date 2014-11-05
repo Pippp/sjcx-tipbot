@@ -4,24 +4,27 @@ var monk = require('monk');
 var db = monk('localhost:27017/countertipper');
 var bcrypt = require('bcrypt');
 
+//set up configs
+var settings = require('./config.js');
+
 var blockscan = require('./blockscan.js');
 bs = new blockscan();
 
 // Setup the ircbot
 var ircbot = require('./ircbot.js');
-var ircb = new ircbot(bs);
+var ircb = new ircbot(bs,settings);
 
 // set up the twitterbot
 var twitterbot = require("./twitterbot.js");
-var tbot = new twitterbot(bs);
+var tbot = new twitterbot(bs,settings);
 
 // set up slack bot
 var slackbot = require("./slackbot");
-var sbot = new slackbot(bs);
+var sbot = new slackbot(bs,settings);
 
 // set up the redditbot
 var redditbot = require("./redditbot.js");
-var rbot = new redditbot(bs);
+var rbot = new redditbot(bs,settings);
 
 // The control server
 var net = require('net');
