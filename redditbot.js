@@ -36,7 +36,6 @@ function redditbot(bs){
      });
 }
 var handleRegister = function(from,replyTo,reddit,bs) {
-    console.log(from+" is registering..his comment:name is "+replyTo);
     db.get('users').findOne({"reddit": from}, {}, function (err, data) { // Check that this user is not in the DB
         if (data) return;
         bs.getNewAddress(function (addr)   // get new addres
@@ -80,13 +79,12 @@ var handleTip = function(from,amount,to,replyTo,reddit,bs){
     });
 };
 var handleBalance = function(from,replyTo,reddit,bs){
-   console.log(from);
    db.get('users').findOne({"reddit":from},{},function(err,data){
       console.log(data);
       if (err) return;
       if (!data) return;
         bs.getBalance(data.addr, function(balance) {
-          reddit.comment(replyTo, "/u/" + from + " your balance is " + balance.SJCX + " SJCX" + balance.BTC + " BTC", function(err){
+          reddit.comment(replyTo, "/u/" + from + " your balance is " + balance.SJCX + " SJCX " + balance.BTC + " BTC", function(err){
               if (err) return console.log(err);
           });
         });
