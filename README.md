@@ -22,7 +22,7 @@ Slack
 git clone
 cd sjcx-tipbot
 npm install
-Enter your bot credentials in config.js
+Enter your bot credentials into config.js
 node app.js
 ```  
 
