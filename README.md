@@ -19,11 +19,10 @@ Slack
 
 ###Install
 ```
-git clone https://github.com/tipsjcx/sjcx-tipbot.git
+git clone
 cd sjcx-tipbot
 npm install
-Enter your twitter api tokens in twitterbot.js
-Change the nick name in ircbot.js
+Enter your bot credentials in config.js
 node app.js
 ```  
 
